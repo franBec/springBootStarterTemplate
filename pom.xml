@@ -49,7 +49,7 @@
         </dependency>
 
         <!--
-         Required by: org.openapitools:openapi-generator-maven-plugin, when configuration > generatorName = spring
+         Required by: org.openapitools:openapi-generator-maven-plugin when generating provider code
          Solves: package io.swagger.v3.oas.annotations does not exist
          -->
         <dependency>
@@ -59,7 +59,7 @@
         </dependency>
 
         <!--
-         Required by: org.openapitools:openapi-generator-maven-plugin, when configuration > generatorName = spring
+         Required by: org.openapitools:openapi-generator-maven-plugin when generating provider code
          Solves: package org.openapitools.jackson.nullable does not exist
          -->
         <dependency>
@@ -69,7 +69,7 @@
         </dependency>
 
         <!--
-         Required by: org.openapitools:openapi-generator-maven-plugin, when configuration > generatorName = spring
+         Required by: org.openapitools:openapi-generator-maven-plugin when generating provider code
          Solves: validations being ignored
          -->
         <dependency>
