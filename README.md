@@ -5,7 +5,7 @@ _by [PollitoDev](https://pollitodev.netlify.app/)_
 
 Starting point for future projects, designed to embrace Component-Driven Development (CDD) practices. It encapsulates essential dependencies and best-practice boilerplates.
 
-## Classes analysis
+## Classes role and explanation
 
 ### dev.pollito.springbootstartertemplate.aspect.LoggingAspect
 
@@ -172,24 +172,23 @@ Configuration to log information to the console, with a customized pattern that 
 
 ## pom.xml
 
-- This template uses [Spring Boot 3.2.3](https://github.com/spring-projects/spring-boot/releases/tag/v3.2.3) and Java 17
-- Basic dependencies: you'll find these in every Spring Boot 3 application:
-  - Spring Boot Starter Web: essential for building web applications using Spring Boot
-  - Spring Boot DevTools: set of tools that make the development process with Spring Boot more efficient.
-  - Spring Boot Configuration Processor: generates metadata for configuration properties, making them easier to work with in IDEs.
-  - Lombok: reduces boilerplate code like getters, setters, and constructors through annotations.
-  - Spring Boot Starter Test: includes support for JUnit, Spring Test & Spring Boot Test, AssertJ, Hamcrest, and a bunch of other libraries necessary for thorough testing.
-- Dependencies required by org.openapitools:openapi-generator-maven-plugin when generating provider code:
-  - io.swagger.core.v3 >> swagger-core-jakarta >> 2.2.8: solves error package io.swagger.v3.oas.annotations does not exist.
-  - org.openapitools >> jackson-databind-nullable >> 0.2.6: solves error package org.openapitools.jackson.nullable does not exist.
-  - org.springframework.boot >> spring-boot-starter-validation >> 3.1.2: solves validations being ignored.
-- Dependencies required by AOP practices:
-  - org.aspectj >> aspectjrt >> 1.9.19: enables you to define and execute aspects that can work across your application's components.
-  - org.aspectj >> aspectjweaver >> 1.9.19: modifies Java classes to weave in the aspects at load time or compile time.
+- This template uses [Spring Boot 3.2.3](https://github.com/spring-projects/spring-boot/releases/tag/v3.2.3) and Java 21
+- Basic dependencies: you'll find these in almost every Spring Boot 3 application out there:
+  - [org.springframework.boot » spring-boot-starter-web » 3.2.3](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web/3.2.3): essential for building web applications using Spring Boot
+  - [org.springframework.boot » spring-boot-devtools » 3.2.3](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools/3.2.3): set of tools that make the development process with Spring Boot more efficient.
+  - [org.springframework.boot » spring-boot-configuration-processor » 3.2.3](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-configuration-processor/3.2.3): generates metadata for configuration properties, making them easier to work with in IDEs.
+  - [org.projectlombok » lombok » 1.18.30](https://mvnrepository.com/artifact/org.projectlombok/lombok/1.18.30): reduces boilerplate code like getters, setters, and constructors through annotations.
+  - [org.springframework.boot » spring-boot-starter-test » 3.2.3](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test/3.2.3): includes support for JUnit, Spring Test & Spring Boot Test, AssertJ, Hamcrest, and a bunch of other libraries necessary for thorough testing.
+- Dependencies required by [org.openapitools » openapi-generator-maven-plugin » 7.4.0](https://mvnrepository.com/artifact/org.openapitools/openapi-generator-maven-plugin/7.4.0) when generating provider code:
+  - [io.swagger.core.v3 » swagger-core-jakarta » 2.2.20](https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-core-jakarta/2.2.20): solves error package io.swagger.v3.oas.annotations does not exist.
+  - [org.openapitools » jackson-databind-nullable » 0.2.6](https://mvnrepository.com/artifact/org.openapitools/jackson-databind-nullable/0.2.6): solves error package org.openapitools.jackson.nullable does not exist.
+  - [org.springframework.boot » spring-boot-starter-validation » 3.2.3](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation/3.2.3): solves validations being ignored.
+- Dependency required by AOP practices:
+  - [org.aspectj » aspectjweaver » 1.9.21.2](https://mvnrepository.com/artifact/org.aspectj/aspectjweaver/1.9.21.2): modifies Java classes to weave in the aspects.
 - Plugins:
-  - Spring Boot Maven Plugin excluding lombok: since Lombok is a compile-time only tool that helps reduce boilerplate code, there's no need to include it in the final packaged application.
-  - Fmt Maven Plugin (by Spotify): formats your Java source code to comply with Google Java Format.
-  - openapi-generator-maven-plugin: a Maven plugin to support the OpenAPI generator project. Is a code generator that embraces CDD practices. By default it's configured like this:
+  - [org.springframework.boot » spring-boot-maven-plugin » 3.2.3](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-maven-plugin/3.2.3) : used for explicitly excluding lombok from the final packaged application, since Lombok is a compile-time only tool that helps reduce boilerplate code.
+  - [com.spotify.fmt » fmt-maven-plugin » 2.23](https://mvnrepository.com/artifact/com.spotify.fmt/fmt-maven-plugin/2.23): formats your Java source code to comply with Google Java Format.
+  - [org.openapitools » openapi-generator-maven-plugin » 7.4.0](https://mvnrepository.com/artifact/org.openapitools/openapi-generator-maven-plugin/7.4.0): a Maven plugin to support the OpenAPI generator project. Is a code generator that embraces CDD practices. By default it's configured like this:
 
 ```xml
 <plugin>
@@ -217,7 +216,6 @@ Configuration to log information to the console, with a customized pattern that 
     </execution>
   </executions>
 </plugin>
-
 ```
 
 Let's check what's going on here.
@@ -261,3 +259,155 @@ You can also see that in the console:
 2024-03-14 21:25:23 INFO  d.p.s.aspect.LoggingAspect [SessionID: 373c02ac-10e3-44b1-9a9b-dc35f807a0ab] - [PetsController.findPets(..)] Response: <501 NOT_IMPLEMENTED Not Implemented,[]>
 2024-03-14 21:25:23 INFO  d.p.s.filter.LogFilter [SessionID: 373c02ac-10e3-44b1-9a9b-dc35f807a0ab] - <<<< Response Status: 501
 ```
+
+## How to add clients
+
+### Add dependencies needed for client generation
+
+These dependencies are:
+
+- [javax.annotation » javax.annotation-api » 1.3.2](https://mvnrepository.com/artifact/javax.annotation/javax.annotation-api/1.3.2): solves error package javax.annotation does not exist.
+- [io.github.openfeign » feign-okhttp » 13.2.1](https://mvnrepository.com/artifact/io.github.openfeign/feign-okhttp/13.2.1): solves error package feign.okhttp does not exist.
+- [org.springframework.cloud » spring-cloud-starter-openfeign » 4.1.0](https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign/4.1.0): solves error package feign.form does not exist.
+- [io.github.openfeign » feign-jackson » 13.2.1](https://mvnrepository.com/artifact/io.github.openfeign/feign-jackson/13.2.1): solves error package feign.jackson does not exist.
+- [com.google.code.findbugs » jsr305 » 3.0.2](https://mvnrepository.com/artifact/com.google.code.findbugs/jsr305/3.0.2): solves error cannot find symbol @javax.annotation.Nullable.
+- [org.junit.jupiter » junit-jupiter-api » 5.10.2](https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api/5.10.2): solves error package org.junit.jupiter.api does not exist.
+
+Additionally, you will need to create configurations for the generated client interfaces. To do that, these dependencies are needed:
+
+- [io.github.openfeign » feign-gson » 13.2.1](https://mvnrepository.com/artifact/io.github.openfeign/feign-gson/13.2.1): solves error Cannot resolve symbol 'GsonEncoder'.
+
+### Generate the client interface
+
+1. Add OAS.yaml client contract(s) in resources/openapi
+2. For each contract, add an excecution in openapi-generator-maven-plugin.
+
+Example: imagine we have a jikan.yaml file (based on [jikan.json](https://raw.githubusercontent.com/jikan-me/jikan-rest/master/storage/api-docs/api-docs.json) )in resources/openapi, a client contract OAS that fetches information about anime.
+
+In the pom.xml, we edit the openapi-generator-maven-plugin as follows:
+
+```xml
+<plugin>
+  <groupId>org.openapitools</groupId>
+  <artifactId>openapi-generator-maven-plugin</artifactId>
+  <version>7.4.0</version>
+  <executions>
+    <execution>
+      <id>provider generation: petstore.yaml</id>
+      <goals>
+        <goal>generate</goal>
+      </goals>
+      <configuration>
+        <inputSpec>${project.basedir}/src/main/resources/openapi/petstore.yaml</inputSpec>
+        <generatorName>spring</generatorName>
+        <output>${project.build.directory}/generated-sources/openapi/</output>
+        <apiPackage>io.swagger.petstore.api</apiPackage>
+        <modelPackage>io.swagger.petstore.models</modelPackage>
+        <configOptions>
+          <interfaceOnly>true</interfaceOnly>
+          <useSpringBoot3>true</useSpringBoot3>
+          <useEnumCaseInsensitive>true</useEnumCaseInsensitive>
+        </configOptions>
+      </configuration>
+    </execution>
+    <execution>
+      <id>client generation: jikan</id>
+      <goals>
+        <goal>generate</goal>
+      </goals>
+      <configuration>
+        <inputSpec>${project.basedir}/src/main/resources/openapi/jikan.yaml</inputSpec>
+        <generatorName>java</generatorName>
+        <library>feign</library>
+        <output>${project.build.directory}/generated-sources/openapi/</output>
+        <apiPackage>moe.jikan.api</apiPackage>
+        <modelPackage>moe.jikan.models</modelPackage>
+        <configOptions>
+          <feignClient>true</feignClient>
+          <interfaceOnly>true</interfaceOnly>
+          <useEnumCaseInsensitive>true</useEnumCaseInsensitive>
+        </configOptions>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
+```
+
+What differences are between an provider generation execution and a client generation execution?
+
+| Aspect            | Provider Generation (`petstore.yaml`) | Client Generation (`jikan.yaml`)                                                                                                                                               |
+|-------------------|----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Purpose**       | Generate server-side code (API provider) for the petstore API. | Generate client-side code to interact with the jikan API.                                                                                                                      |
+| **Generator Name**| `spring` (optimized for Spring Boot)   | `java` (generic Java code generation)                                                                                                                                          |
+| **Library**       | N/A (not specified as it's inherently for Spring) | `feign` (uses Feign library for HTTP requests)                                                                                                                                 |
+| **Output Packages**| API: `io.swagger.petstore.api`<br>Models: `io.swagger.petstore.models` | API: `moe.jikan.api`<br>Models: `moe.jikan.models`                                                                                                                             |
+| **Special Configurations**| - `interfaceOnly`: Generates only interfaces.<br>- `useSpringBoot3`: Optimized for Spring Boot 3.<br>- `useEnumCaseInsensitive`: Case-insensitive enum deserialization. | - `interfaceOnly`: Generates only interfaces.<br>-`feignClient`: Generated interfaces are Feign clients.<br>- `useEnumCaseInsensitive`: Case-insensitive enum deserialization. |
+
+There're no limits in how many clients can be generated. Each client requires its own execution block.
+
+### Create the corresponding URL value in resources -> application.yml
+
+By default, the generated interface will use the URL in the OAS server section. Usually in many scenarios, that value doesn't exist, is a mock URL, or it works but is pointing to a development or testing URL.
+
+Defining a client URL in application.yml (or any external configuration file) rather than hardcoding it as a constant in your code, is a common best practice for several reasons:
+
+- Environment Flexibility: In real-world applications, you often have different environments such as development, testing, staging, and production. Each of these environments might require different configurations, including different client URLs. Externalizing these values to a configuration file like application.yml makes it easy to change them per environment without changing the codebase.
+- Ease of Maintenance: When a value is likely to change over time, keeping it in a configuration file means you can update it without having to recompile your code. This is especially useful for URLs, which can change due to new deployments, service migrations, or domain changes.
+- Security: Hardcoding sensitive information, like URLs to internal systems or services, in the source code can pose a security risk, especially if the code is stored in a public or shared repository. Keeping such information in external configuration files helps in securing sensitive data, especially when combined with configuration management tools that support encryption of such properties.
+- Separation of Concerns: By keeping configuration separate from code, you maintain a clear separation of concerns. Code defines behavior, while configuration specifies the environment-specific parameters. This adheres to the principles of Twelve-Factor App methodology, enhancing modularity and maintainability.
+- Dynamic Configuration: Using external configurations allows for dynamic changes without the need for a new deployment. Some frameworks and platforms support refreshing configuration properties on the fly, which can be incredibly useful for feature toggles, adjusting log levels, or updating URLs without downtime.
+- Collaboration and Accessibility: Developers, operations teams, and sometimes even automated deployment tools might need access to these configurations to adjust application behavior in different environments. Having them externalized in application.yml makes this process more accessible and collaborative.
+
+For our example, the application.yml URL definition would look something like this:
+```yaml
+jikan:
+  baseUrl: https://api.jikan.moe/v4
+```
+
+### Create a @Configuration @ConfigurationProperties class
+
+This class reads values from application.yml. Here is an implementation example.
+
+```java
+@Configuration
+@ConfigurationProperties(prefix = "jikan")
+@Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class JikanProperties {
+  String baseUrl;
+}
+```
+
+### Create an ApiConfig class
+
+This class configures a Feign client for interacting with the generated client API service, complete with custom serialization, deserialization, logging, and error handling.
+
+Here is an implementation example:
+
+```java
+@Configuration
+@ComponentScans(
+        value = {
+                @ComponentScan(
+                        basePackages = {
+                                "moe.jikan.api",
+                        })
+        })
+@RequiredArgsConstructor
+public class AnimeApiConfig {
+
+  private final JikanProperties jikanProperties;
+
+  @Bean
+  public AnimeApi jikanApi() {
+    return Feign.builder()
+            .client(new OkHttpClient())
+            .encoder(new GsonEncoder())
+            .decoder(new GsonDecoder())
+            .logger(new Slf4jLogger(AnimeApi.class))
+            .logLevel(Logger.Level.FULL)
+            .target(AnimeApi.class, jikanProperties.getBaseUrl());
+  }
+}
+```
+
