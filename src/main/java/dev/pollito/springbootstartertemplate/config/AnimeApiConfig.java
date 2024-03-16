@@ -1,5 +1,6 @@
 package dev.pollito.springbootstartertemplate.config;
 
+import dev.pollito.springbootstartertemplate.errordecoder.JikanErrorDecoder;
 import dev.pollito.springbootstartertemplate.property.JikanProperties;
 import feign.Feign;
 import feign.Logger;
@@ -33,6 +34,7 @@ public class AnimeApiConfig {
         .client(new OkHttpClient())
         .encoder(new GsonEncoder())
         .decoder(new GsonDecoder())
+        .errorDecoder(new JikanErrorDecoder())
         .logger(new Slf4jLogger(AnimeApi.class))
         .logLevel(Logger.Level.FULL)
         .target(AnimeApi.class, jikanProperties.getBaseUrl());

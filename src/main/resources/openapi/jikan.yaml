@@ -5961,6 +5961,29 @@ components:
                 type: object
           type: object
         - $ref: '#/components/schemas/pagination'
+    error:
+      description: a JSON Error response
+      properties:
+        status:
+          description: Returned HTTP Status Code
+          type: integer
+          example: 500
+        type:
+          description: Thrown Exception
+          type: string
+          example: "InternalException"
+        message:
+          description: Human-readable error message
+          type: string
+          example: "Exception Message"
+        error:
+          description: Error response and trace from the API
+          type: string
+          example: "Exception Trace"
+        report_url:
+          description: Clicking this would redirect you to a generated GitHub issue
+          type: string
+          example: "https://github.com..."
   responses:
     '400':
       description: 'Error: Bad request. When required parameters were not supplied.'
