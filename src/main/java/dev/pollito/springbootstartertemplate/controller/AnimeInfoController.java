@@ -1,7 +1,7 @@
 package dev.pollito.springbootstartertemplate.controller;
 
 import dev.pollito.springbootstartertemplate.api.AnimeApi;
-import dev.pollito.springbootstartertemplate.models.AnimeInfo;
+import dev.pollito.springbootstartertemplate.models.AnimeStatisticsViewers;
 import dev.pollito.springbootstartertemplate.service.AnimeInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ public class AnimeInfoController implements AnimeApi {
   private final AnimeInfoService animeInfoService;
 
   @Override
-  public ResponseEntity<AnimeInfo> getAnimeInfo(Integer id) {
-    return ResponseEntity.ok(animeInfoService.getAnimeInfo(id));
+  public ResponseEntity<AnimeStatisticsViewers> getAnimeStatisticsViewers(Integer id) {
+    return ResponseEntity.ok(animeInfoService.getAnimeStatisticsViewers(id));
   }
 }

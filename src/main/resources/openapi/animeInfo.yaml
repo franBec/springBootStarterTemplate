@@ -13,8 +13,8 @@ paths:
     get:
       tags:
         - Anime
-      summary: Given My Anime List id, gets name and year of the anime
-      operationId: getAnimeInfo
+      summary: Given My Anime List id, gets the number of viewers
+      operationId: getAnimeStatisticsViewers
       parameters:
         - name: id
           in: query
@@ -28,7 +28,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AnimeInfo'
+                $ref: '#/components/schemas/AnimeStatisticsViewers'
 
         default:
           description: Error
@@ -39,12 +39,10 @@ paths:
 
 components:
   schemas:
-    AnimeInfo:
+    AnimeStatisticsViewers:
       type: object
       properties:
-        title:
-          type: string
-        year:
+        viewers:
           type: integer
     Error:
       type: object

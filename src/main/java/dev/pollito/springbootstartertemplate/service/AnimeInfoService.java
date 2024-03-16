@@ -1,7 +1,7 @@
 package dev.pollito.springbootstartertemplate.service;
 
-import dev.pollito.springbootstartertemplate.models.AnimeInfo;
+import dev.pollito.springbootstartertemplate.models.AnimeStatisticsViewers;
 
 public interface AnimeInfoService {
-  AnimeInfo getAnimeInfo(Integer id);
+  AnimeStatisticsViewers getAnimeStatisticsViewers(Integer id);
 }
