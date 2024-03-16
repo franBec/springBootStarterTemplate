@@ -42,7 +42,7 @@ components:
     AnimeInfo:
       type: object
       properties:
-        name:
+        title:
           type: string
         year:
           type: integer

@@ -472,10 +472,100 @@ public class AnimeApiConfig {
   }
 }
 ```
-### Create a service that glue everything together
+## Create a service that glue everything together
 
 This is just business logic to showoff that everything is working. The idea here is controller -> service -> api client and back.
 
 We are in need of a service. Let's create a very simple one.
 
+### Add a mapper (mapstruct)
+
+First, add a mapper to map the api response to something the controller expects. My personal choice is mapstruct. For that you'll need these dependencies:
+
+- [org.mapstruct » mapstruct » 1.5.5.Final](https://mvnrepository.com/artifact/org.mapstruct/mapstruct/1.5.5.Final).
+- [org.apache.maven.plugins » maven-compiler-plugin » 3.12.1](https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin/3.12.1).
+- [org.mapstruct » mapstruct-processor » 1.5.5.Final](https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor/1.5.5.Final).
+- [org.projectlombok » lombok-mapstruct-binding » 0.2.0](https://mvnrepository.com/artifact/org.projectlombok/lombok-mapstruct-binding/0.2.0).
+
+The plugin configuration is quite tricky. Looks something like this:
+
+```xml
+<plugin>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>3.12.1</version>
+    <configuration>
+        <annotationProcessorPaths>
+            <path>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>1.5.5.Final</version>
+            </path>
+            <path>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </path>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok-mapstruct-binding</artifactId>
+                <version>0.2.0</version>
+            </dependency>
+        </annotationProcessorPaths>
+        <compilerArgs>
+            <arg>-parameters</arg>
+        </compilerArgs>
+    </configuration>
+</plugin>
+```
+
+After a compile, create a mapper interface
+
+```java
+@Mapper(componentModel = "spring")
+public interface AnimeInfoMapper {
+
+  @Mapping(source = "response.data.title", target = "title")
+  @Mapping(source = "response.data.year", target = "year")
+  AnimeInfo map(GetAnimeFullById200Response response);
+}
+```
+### Create a service
+
+```java
+public interface AnimeInfoService {
+    AnimeInfo getAnimeInfo(Integer id);
+}
+```
+
+### Implement the service
+```java
+@Service
+@RequiredArgsConstructor
+public class AnimeInfoServiceImpl implements AnimeInfoService {
+  private final AnimeApi animeApi;
+  private final AnimeInfoMapper animeInfoMapper;
+
+  @Override
+  public AnimeInfo getAnimeInfo(Integer id) {
+    return animeInfoMapper.map(animeApi.getAnimeFullById(id));
+  }
+}
+```
+
+### Inject the interface in the controller
+
+```java
+@RestController
+@RequiredArgsConstructor
+public class AnimeInfoController implements AnimeApi {
+  private final AnimeInfoService animeInfoService;
+
+  @Override
+  public ResponseEntity<AnimeInfo> getAnimeInfo(Integer id) {
+    return ResponseEntity.ok(animeInfoService.getAnimeInfo(id));
+  }
+}
+```
+
+### Give it a try
 
