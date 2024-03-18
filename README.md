@@ -1,7 +1,17 @@
 # Spring Boot Starter Template
 _by [PollitoDev](https://pollitodev.netlify.app/)_
 
-Starting point for future projects, designed to embrace Component-Driven Development (CDD) practices. It encapsulates essential dependencies and best-practice boilerplates.
+springBootStarterTemplate is a starting point for future projects, designed to embrace Component-Driven Development (CDD) practices. It encapsulates essential dependencies and best-practice boilerplates.
+
+It has two branches:
+
+- **feature/provider-gen**: satisfies
+  - _"A microservice complies at least with one contract, playing the provider role."_
+  - The zero scenario of "_A microservice can play the consumer role in zero, one, or many contracts._"
+- **feature/consumer-gen**: an extension of feature/provider-gen, which satisfies everything stated there plus
+  - The one or many scenarios of "_A microservice can play the consumer role in zero, one, or many contracts._"
+
+## springBootStarterTemplate -> feature/provider-gen
 
 Let's do a run of each relevant file content.
 
@@ -67,7 +77,7 @@ Utility for constructing error response entities, so all error responses have th
 
 Default entry point to a Spring Boot application.
 
-### Resources > openapi files
+### resources > openapi files
 
 This is a totally arbitrary folder inside resources where I decided is good enough to put all the OAS files.
 
@@ -105,7 +115,7 @@ Error:
 
 Feel free to organize files in subfolders if necessary. Don't forget to maintain consistency in the pom.xml (more on that later).
 
-### Resources > logback.xml
+### resources > logback.xml
 
 Configuration to log information to the console, with a customized pattern that includes a session ID for better traceability of log entries.
 
