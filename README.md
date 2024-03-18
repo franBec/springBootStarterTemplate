@@ -1,4 +1,4 @@
-# Spring Boot Starter Template
+'# Spring Boot Starter Template
 _by [PollitoDev](https://pollitodev.netlify.app/)_
 
 ## Purpose
@@ -103,26 +103,9 @@ By default it only contains the constant SLF4J_MDC_SESSION_ID_KEY, used in **Log
 
 Feel free to add all your needed constants here.
 
-### dev.pollito.springbootstartertemplate.util.ControllerAdviceUtil 
+### dev.pollito.springbootstartertemplate.util.ErrorResponseBuilder 
 
-Utility for handling exceptions and constructing error responses.
-
-Feel free to add all your error responses construction logic here. Example: Let's imagine we need to build a response for a InvalidBase64ImageException. That would look something like this:
-
-```java
-public class ControllerAdviceUtil {
-    //others methods
-    //...
-    
-    public static ResponseEntity<Error> getBadRequestError(InvalidBase64ImageException e) {
-        return buildErrorResponse(
-                HttpStatus.BAD_REQUEST, e, "image provided is not a valid Base64Image");
-    }
-}
-
-```
-
-You could also create another utility class to separate error responses construction logic.
+Utility for constructing error response entities, so all error responses have the same structure.
 
 ### dev.pollito.springbootstartertemplate.SpringBootStarterTemplateApplication
 

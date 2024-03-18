@@ -11,9 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-public class ControllerAdviceUtil {
+public class ErrorResponseBuilder {
 
-  private ControllerAdviceUtil() {}
+  private ErrorResponseBuilder() {}
 
   public static ResponseEntity<Error> buildErrorResponse(
       HttpStatus status, Exception e, String errorMessage) {

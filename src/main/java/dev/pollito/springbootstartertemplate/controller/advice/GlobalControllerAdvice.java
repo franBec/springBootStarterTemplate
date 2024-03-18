@@ -1,6 +1,6 @@
 package dev.pollito.springbootstartertemplate.controller.advice;
 
-import static dev.pollito.springbootstartertemplate.util.ControllerAdviceUtil.buildErrorResponse;
+import static dev.pollito.springbootstartertemplate.util.ErrorResponseBuilder.buildErrorResponse;
 
 import dev.pollito.springbootstartertemplate.models.Error;
 import jakarta.validation.ConstraintViolation;
