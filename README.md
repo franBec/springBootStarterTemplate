@@ -524,9 +524,8 @@ After a compile, create a mapper interface
 @Mapper(componentModel = "spring")
 public interface AnimeInfoMapper {
 
-  @Mapping(source = "response.data.title", target = "title")
-  @Mapping(source = "response.data.year", target = "year")
-  AnimeInfo map(GetAnimeFullById200Response response);
+  @Mapping(source = "response.data.completed", target = "viewers")
+  AnimeStatisticsViewers map(AnimeStatistics response);
 }
 ```
 ### Create a service
@@ -546,8 +545,8 @@ public class AnimeInfoServiceImpl implements AnimeInfoService {
   private final AnimeInfoMapper animeInfoMapper;
 
   @Override
-  public AnimeInfo getAnimeInfo(Integer id) {
-    return animeInfoMapper.map(animeApi.getAnimeFullById(id));
+  public AnimeStatisticsViewers getAnimeStatisticsViewers(Integer id) {
+    return animeInfoMapper.map(animeApi.getAnimeStatistics(id));
   }
 }
 ```
@@ -561,11 +560,32 @@ public class AnimeInfoController implements AnimeApi {
   private final AnimeInfoService animeInfoService;
 
   @Override
-  public ResponseEntity<AnimeInfo> getAnimeInfo(Integer id) {
-    return ResponseEntity.ok(animeInfoService.getAnimeInfo(id));
+  public ResponseEntity<AnimeStatisticsViewers> getAnimeStatisticsViewers(Integer id) {
+    return ResponseEntity.ok(animeInfoService.getAnimeStatisticsViewers(id));
   }
 }
 ```
 
 ### Give it a try
+
+```shell
+curl --location 'http://localhost:8080/anime?id=846'
+```
+
+Response:
+```json
+{
+    "viewers": 119204
+}
+```
+
+We can also see it in the logs:
+```
+2024-03-16 01:46:30 INFO  d.p.s.filter.LogFilter [SessionID: 8ee24fa9-ca0f-4f8b-a3a2-781558fec45e] - >>>> Method: GET; URI: /anime; QueryString: id=846; Headers: {user-agent: PostmanRuntime/7.37.0, accept: */*, cache-control: no-cache, postman-token: a446a845-3439-45d3-b698-39b28a3c5243, host: localhost:8080, accept-encoding: gzip, deflate, br, connection: keep-alive}
+2024-03-16 01:46:30 INFO  d.p.s.aspect.LoggingAspect [SessionID: 8ee24fa9-ca0f-4f8b-a3a2-781558fec45e] - [AnimeInfoController.getAnimeStatisticsViewers(..)] Args: [846]
+2024-03-16 01:46:31 INFO  d.p.s.aspect.LoggingAspect [SessionID: 8ee24fa9-ca0f-4f8b-a3a2-781558fec45e] - [AnimeInfoController.getAnimeStatisticsViewers(..)] Response: <200 OK OK,class AnimeStatisticsViewers {
+    viewers: 119204
+},[]>
+2024-03-16 01:46:31 INFO  d.p.s.filter.LogFilter [SessionID: 8ee24fa9-ca0f-4f8b-a3a2-781558fec45e] - <<<< Response Status: 200
+```
 
