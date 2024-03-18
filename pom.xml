@@ -160,25 +160,6 @@
                             </configOptions>
                         </configuration>
                     </execution>
-                    <execution>
-                        <id>client generation: jikan</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/openapi/jikan.yaml</inputSpec>
-                            <generatorName>java</generatorName>
-                            <library>feign</library>
-                            <output>${project.build.directory}/generated-sources/openapi/</output>
-                            <apiPackage>moe.jikan.api</apiPackage>
-                            <modelPackage>moe.jikan.models</modelPackage>
-                            <configOptions>
-                                <feignClient>true</feignClient>
-                                <interfaceOnly>true</interfaceOnly>
-                                <useEnumCaseInsensitive>true</useEnumCaseInsensitive>
-                            </configOptions>
-                        </configuration>
-                    </execution>
                 </executions>
             </plugin>
             <plugin>
