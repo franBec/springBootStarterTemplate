@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Anime Info Api
-  description: A very simple OAS Provider contract
+  description: A very simple OAS contract
   version: 1.0.0
   contact:
     name: Pollito
