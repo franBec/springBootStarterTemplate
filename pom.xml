@@ -127,18 +127,18 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
+<!--            <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
                 <version>7.2.0</version>
                 <executions>
                     <execution>
-                        <id>provider generation - animeinfo.yaml</id>
+                        <id>provider generation - your OAS file</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/openapi/animeinfo.yaml</inputSpec>
+                            <inputSpec>${project.basedir}/src/main/resources/openapi/your OAS file</inputSpec>
                             <generatorName>spring</generatorName>
                             <output>${project.build.directory}/generated-sources/openapi/</output>
                             <apiPackage>dev.pollito.springbootstartertemplate.api</apiPackage>
@@ -151,7 +151,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 </project>
