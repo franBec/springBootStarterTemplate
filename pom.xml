@@ -127,22 +127,22 @@
                     </execution>
                 </executions>
             </plugin>
-<!--            <plugin>
+            <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
                 <version>7.2.0</version>
                 <executions>
                     <execution>
-                        <id>provider generation - your OAS file</id>
+                        <id>provider generation - petstore.yaml</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/openapi/your OAS file</inputSpec>
+                            <inputSpec>${project.basedir}/src/main/resources/openapi/petstore.yaml</inputSpec>
                             <generatorName>spring</generatorName>
                             <output>${project.build.directory}/generated-sources/openapi/</output>
-                            <apiPackage>dev.pollito.springbootstartertemplate.api</apiPackage>
-                            <modelPackage>dev.pollito.springbootstartertemplate.models</modelPackage>
+                            <apiPackage>io.swagger.petstore.api</apiPackage>
+                            <modelPackage>io.swagger.petstore.models</modelPackage>
                             <configOptions>
                                 <interfaceOnly>true</interfaceOnly>
                                 <useSpringBoot3>true</useSpringBoot3>
@@ -151,7 +151,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>-->
+            </plugin>
         </plugins>
     </build>
 </project>
