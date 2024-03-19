@@ -2,7 +2,7 @@ package dev.pollito.springbootstartertemplate.util;
 
 import static dev.pollito.springbootstartertemplate.util.Constants.SLF4J_MDC_SESSION_ID_KEY;
 
-import io.swagger.petstore.models.Error;
+import dev.pollito.springbootstartertemplate.models.Error;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 import org.slf4j.MDC;
