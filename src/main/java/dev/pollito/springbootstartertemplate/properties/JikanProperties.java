@@ -11,5 +11,5 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class JikanProperties {
-    String baseUrl;
+  String baseUrl;
 }

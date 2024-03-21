@@ -17,26 +17,26 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScans(
-        value = {
-                @ComponentScan(
-                        basePackages = {
-                                "moe.jikan.api",
-                        })
-        })
+    value = {
+      @ComponentScan(
+          basePackages = {
+            "moe.jikan.api",
+          })
+    })
 @RequiredArgsConstructor
 public class AnimeApiConfig {
 
-    private final JikanProperties jikanProperties;
+  private final JikanProperties jikanProperties;
 
-    @Bean
-    public AnimeApi jikanApi() {
-        return Feign.builder()
-                .client(new OkHttpClient())
-                .encoder(new GsonEncoder())
-                .decoder(new GsonDecoder())
-                .errorDecoder(new JikanErrorDecoder())
-                .logger(new Slf4jLogger(AnimeApi.class))
-                .logLevel(Logger.Level.FULL)
-                .target(AnimeApi.class, jikanProperties.getBaseUrl());
-    }
+  @Bean
+  public AnimeApi jikanApi() {
+    return Feign.builder()
+        .client(new OkHttpClient())
+        .encoder(new GsonEncoder())
+        .decoder(new GsonDecoder())
+        .errorDecoder(new JikanErrorDecoder())
+        .logger(new Slf4jLogger(AnimeApi.class))
+        .logLevel(Logger.Level.FULL)
+        .target(AnimeApi.class, jikanProperties.getBaseUrl());
+  }
 }

@@ -8,6 +8,6 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface AnimeInfoMapper {
 
-    @Mapping(source = "response.data.completed", target = "viewers")
-    AnimeStatisticsViewers map(AnimeStatistics response);
+  @Mapping(source = "response.data.completed", target = "viewers")
+  AnimeStatisticsViewers map(AnimeStatistics response);
 }

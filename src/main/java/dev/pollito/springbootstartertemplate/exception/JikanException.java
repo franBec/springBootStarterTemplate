@@ -7,5 +7,5 @@ import moe.jikan.models.Error;
 @RequiredArgsConstructor
 @Getter
 public class JikanException extends RuntimeException {
-    private final transient Error error;
+  private final transient Error error;
 }

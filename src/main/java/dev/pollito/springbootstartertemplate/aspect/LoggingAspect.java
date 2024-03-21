@@ -17,7 +17,10 @@ public class LoggingAspect {
   @Pointcut("execution(public * dev.pollito.springbootstartertemplate.controller..*.*(..))")
   public void controllerPublicMethodsPointcut() {}
 
-  @Before("controllerPublicMethodsPointcut()")
+  @Pointcut("execution(public * moe.jikan.api.*.*(..))")
+  public void jikanApiMethodsPointcut() {}
+
+  @Before("controllerPublicMethodsPointcut() || jikanApiMethodsPointcut()")
   public void logBefore(JoinPoint joinPoint) {
     log.info(
         "["
@@ -26,7 +29,9 @@ public class LoggingAspect {
             + Arrays.toString(joinPoint.getArgs()));
   }
 
-  @AfterReturning(pointcut = "controllerPublicMethodsPointcut()", returning = "result")
+  @AfterReturning(
+      pointcut = "controllerPublicMethodsPointcut() || jikanApiMethodsPointcut()",
+      returning = "result")
   public void logAfterReturning(JoinPoint joinPoint, Object result) {
     log.info("[" + joinPoint.getSignature().toShortString() + "] Response: " + result);
   }

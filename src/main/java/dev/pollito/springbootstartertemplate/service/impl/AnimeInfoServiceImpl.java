@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class AnimeInfoServiceImpl implements AnimeInfoService {
-    private final AnimeApi animeApi;
-    private final AnimeInfoMapper animeInfoMapper;
+  private final AnimeApi animeApi;
+  private final AnimeInfoMapper animeInfoMapper;
 
-    @Override
-    public AnimeStatisticsViewers getAnimeInfo(Integer id) {
-        return animeInfoMapper.map(animeApi.getAnimeStatistics(id));
-    }
+  @Override
+  public AnimeStatisticsViewers getAnimeInfo(Integer id) {
+    return animeInfoMapper.map(animeApi.getAnimeStatistics(id));
+  }
 }
